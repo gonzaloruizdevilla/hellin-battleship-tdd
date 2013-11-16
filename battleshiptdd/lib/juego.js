@@ -29,14 +29,6 @@ function seleccionaTablero(partida, color) {
     return color === ROJO ? partida.tableroRojo : partida.tableroAzul;
 }
 
-function preparaBarcoParaColocar(barco) {
-    return {
-        posicion: barco.posicion,
-        direccion: barco.direccion,
-        tipo: barco.tipo
-    };
-}
-
 function largos(tipo) {
     var longitud;
     if (tipo === ACORAZADO) {longitud = 5; }
@@ -50,16 +42,58 @@ function largoAdicional(opciones, direccion) {
     return (opciones.direccion !== direccion) ? 0 : largos(opciones.tipo) - 1;
 }
 
-function verificaPosicionBarco(tablero, opciones) {
+function casillasOcupadas(opciones) {
     var i,
-           posicion = opciones.posicion,
-           minX = posicion.x,
-           minY = posicion.y,
-           maxX = posicion.x + largoAdicional(opciones, HORIZONTAL),
-           maxY = posicion.y + largoAdicional(opciones, VERTICAL);
+        posicion = opciones.posicion,
+        casillas = [],
+        minX = posicion.x,
+        minY = posicion.y,
+        maxX = posicion.x + largoAdicional(opciones, HORIZONTAL),
+        maxY = posicion.y + largoAdicional(opciones, VERTICAL);
    if (minX < 0 || minY < 0 || maxX > 9 || maxY > 9) {
        throw Error("Barco fuera de los limites.");
    }
+   if (minX === maxX) {
+       for (i = minY; i <= maxY; i += 1) {
+           casillas.push({x: minX, y: i, impacto: false});
+       }
+   } else {
+       for (i = minX; i <= maxX; i += 1) {
+           casillas.push({x: i, y: minY, impacto: false});
+       }
+   }
+   return casillas;
+}
+
+function coincidenCasillas(casillasA, casillasB) {
+    var coinciden = false;
+    casillasA.forEach(function (casillaA) {
+        casillasB.forEach(function (casillaB) {
+            if (casillaA.x === casillaB.x && casillaA.y === casillaB.y) {
+                throw new Error("Barco coincidente con otro en casillas (" + casillaA.x + ", " + casillaA.y + ")");
+            }
+        });
+    });
+    return coinciden;
+}
+
+function verificaPosicionBarco(tablero, opciones) {
+    var casillasNuevoBarco = casillasOcupadas(opciones);
+    tablero.barcos.forEach(function(barco) {
+        if (coincidenCasillas(barco.casillas, casillasNuevoBarco)) {
+            throw new Error("Barco sobre otro");
+        }
+    });
+}
+
+function preparaBarcoParaColocar(barco) {
+    var casillas = casillasOcupadas(barco);
+    return {
+        posicion: barco.posicion,
+        direccion: barco.direccion,
+        tipo: barco.tipo,
+        casillas: casillas
+    };
 }
 
 function colocaBarco(partida, barco) {

@@ -137,6 +137,34 @@ describe('juego', function  () {
             }
             expect(colocaBarcoEncima).to.throw("Barco coincidente con otro en casillas (1, 0)");
         });
+
+        it('debe informar el estado del tablero', function () {
+            var y = 0;
+            [[juego.ACORAZADO,1],
+             [juego.SUBMARINO,2],
+             [juego.CORBETA,3],
+             [juego.LANCHA,3]
+            ].forEach(function (par){
+                var tipo = par[0], numero = par[1], i;
+                for(i = 0; i <numero; ++i) {
+                    partida.colocaBarco({
+                        color: juego.ROJO,
+                        posicion: {x:0, y:y},
+                        direccion: juego.HORIZONTAL,
+                        tipo: tipo
+                    });
+                    y += 1;
+                }
+            });
+            expect(partida.tableroRojo.estado).to.equal(juego.COLOCANDO);
+            partida.colocaBarco({
+                color: juego.ROJO,
+                posicion: {x:0, y:9},
+                direccion: juego.HORIZONTAL,
+                tipo: juego.LANCHA
+            });
+            expect(partida.tableroRojo.estado).to.equal(juego.COLOCADO);
+        });
     });
 
 });
