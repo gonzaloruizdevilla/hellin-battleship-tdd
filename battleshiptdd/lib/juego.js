@@ -120,8 +120,29 @@ function colocaBarco(partida, barco) {
     };
 }
 
+
+function buscaBarco(tablero, coordenadas) {
+    var barcoBuscado = null;
+    tablero.barcos.forEach(function (barco) {
+        barco.casillas.forEach(function (casilla) {
+            if (casilla.x === coordenadas.x && casilla.y === coordenadas.y) {
+                barcoBuscado = barco;
+            }
+        });
+    });
+    return barcoBuscado;
+}
+
 function dispara(partida, disparo) {
-    return AGUA;
+    var tablero = seleccionaTablero(partida, disparo.destino),
+        barco = buscaBarco(tablero, disparo.coordenadas),
+        resultado;
+    if (!barco) {
+        resultado = AGUA;
+    } else {
+        resultado = TOCADO;
+    }
+    return resultado;
 }
 
 function nuevaPartida() {

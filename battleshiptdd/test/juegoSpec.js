@@ -223,5 +223,18 @@ describe('juego', function  () {
             });
             expect(resultado).to.equal(juego.TOCADO);
         });
+
+        it('debe informar cuando un disparo hunde un barco', function (){
+            var resultado;
+            partida.dispara({
+                destino: juego.ROJO,
+                coordenadas: {x:0,y:8}
+            });
+            resultado = partida.dispara({
+                destino: juego.ROJO,
+                coordenadas: {x:1,y:8}
+            });
+            expect(resultado).to.equal(juego.HUNDIDO);
+        });
     });
 });
