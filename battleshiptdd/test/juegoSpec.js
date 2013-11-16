@@ -236,5 +236,22 @@ describe('juego', function  () {
             });
             expect(resultado).to.equal(juego.HUNDIDO);
         });
+
+        it('debe informar cuando un disparo hunde el último barco', function (){
+            var resultado;
+            partida.tableroRojo.barcos.forEach(function (barco) {
+                barco.estado = juego.HUNDIDO;
+            });
+            partida.dispara({
+                destino: juego.ROJO,
+                coordenadas: {x:0,y:8}
+            });
+            resultado = partida.dispara({
+                destino: juego.ROJO,
+                coordenadas: {x:1,y:8}
+            });
+            expect(resultado).to.equal(juego.GANA);
+            expect(partida.estado).to.equal(juego.GANA);
+        });
     });
 });

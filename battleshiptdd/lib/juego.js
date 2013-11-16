@@ -126,11 +126,22 @@ function buscaBarco(tablero, coordenadas) {
     tablero.barcos.forEach(function (barco) {
         barco.casillas.forEach(function (casilla) {
             if (casilla.x === coordenadas.x && casilla.y === coordenadas.y) {
+                casilla.impacto = true;
                 barcoBuscado = barco;
             }
         });
     });
     return barcoBuscado;
+}
+
+function actualizaEstadoBarco(barco) {
+    var hundido = true;
+    barco.casillas.forEach(function (casilla) {
+        if (!casilla.impacto) {
+            hundido = false;
+        }
+    });
+    barco.estado = hundido ? HUNDIDO : TOCADO;
 }
 
 function dispara(partida, disparo) {
@@ -140,7 +151,8 @@ function dispara(partida, disparo) {
     if (!barco) {
         resultado = AGUA;
     } else {
-        resultado = TOCADO;
+        actualizaEstadoBarco(barco, disparo.coordenadas);
+        resultado = barco.estado;
     }
     return resultado;
 }
