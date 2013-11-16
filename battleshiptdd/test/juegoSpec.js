@@ -41,6 +41,12 @@ describe('juego', function  () {
         it('debe crear una nueva partida', function () {
             expect(juego.nuevaPartida()).not.to.be.null;
         });
+
+        it('debe crear los dos tableros', function () {
+            var partida = juego.nuevaPartida();
+            expect(partida.tableroAzul).not.to.be.null;
+            expect(partida.tableroRojo).not.to.be.null;
+        });
     });
 
 });

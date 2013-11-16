@@ -27,6 +27,8 @@
 
 
 function nuevaPartida() {
+    return {
+    };
 }
 
 module.exports = {
