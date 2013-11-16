@@ -56,6 +56,24 @@ describe('juego', function  () {
             tableroAzul = partida.tableroAzul;
             tableroRojo = partida.tableroRojo;
         });
+
+        it('debe colocar un barco', function () {
+            var tableroRojo;
+            partida.colocaBarco({
+                color: juego.ROJO,
+                posicion: {
+                    x: 0,
+                    y: 0
+                },
+                direccion: juego.HORIZONTAL,
+                tipo: juego.ACORAZADO
+            });
+            tableroRojo = partida.tableroRojo;
+            expect(tableroRojo.barcos.length).to.equal(1);
+            expect(tableroRojo.barcos[0].posicion).to.deep.equal({x:0,y:0});
+            expect(tableroRojo.barcos[0].direccion).to.equal(juego.HORIZONTAL);
+            expect(tableroRojo.barcos[0].tipo).to.equal(juego.ACORAZADO);
+        });
     });
 
 });
