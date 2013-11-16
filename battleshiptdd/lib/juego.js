@@ -96,10 +96,23 @@ function preparaBarcoParaColocar(barco) {
     };
 }
 
+function actualizaEstadoTablero(tablero) {
+    tablero.estado = tablero.barcos.length === 10 ? COLOCADO :  COLOCANDO;
+}
+
+function actualizaEstadoPartida(partida) {
+    actualizaEstadoTablero(partida.tableroRojo);
+    actualizaEstadoTablero(partida.tableroAzul);
+}
+
 function colocaBarco(partida, barco) {
     var tablero = seleccionaTablero(partida, barco.color);
     verificaPosicionBarco(tablero, barco);
     tablero.barcos.push(preparaBarcoParaColocar(barco));
+    actualizaEstadoPartida(partida);
+    return {
+        estado: partida.estado
+    };
 }
 
 function nuevaPartida() {

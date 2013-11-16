@@ -4,6 +4,32 @@
 var expect = require('chai').expect,
     juego = require('../lib/juego');
 
+function cargaBarcos(partida) {
+    var y = 0;
+    [
+        [juego.ACORAZADO, 1],
+        [juego.SUBMARINO, 2],
+        [juego.CORBETA, 3],
+        [juego.LANCHA, 4]
+    ].forEach(function (par) {
+        var tipo = par[0], numero = par[1], i;
+        function barco(color) {
+            return {
+                color: color,
+                posicion: {x: 0, y: y},
+                direccion: juego.HORIZONTAL,
+                tipo: tipo
+            };
+        }
+        for (i = 0; i < numero; ++i) {
+            partida.colocaBarco(barco(juego.ROJO));
+            partida.colocaBarco(barco(juego.AZUL));
+            y += 1;
+        }
+    });
+}
+
+
 describe('juego', function  () {
     it('debe ser algo', function () {
         expect(juego).not.to.be.null;
@@ -164,6 +190,12 @@ describe('juego', function  () {
                 tipo: juego.LANCHA
             });
             expect(partida.tableroRojo.estado).to.equal(juego.COLOCADO);
+        });
+
+        it('debe informar el estado del juego', function () {
+            expect(partida.estado).to.equal(juego.EMPEZANDO);
+            cargaBarcos(partida);
+            expect(partida.estado).to.equal(juego.JUGANDO);
         });
     });
 
