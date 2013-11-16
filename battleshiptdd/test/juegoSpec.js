@@ -215,5 +215,13 @@ describe('juego', function  () {
             });
             expect(resultado).to.equal(juego.AGUA);
         });
+
+        it('debe informar cuando un disparo toca un barco', function (){
+            var resultado = partida.dispara({
+                destino: juego.ROJO,
+                coordenadas: {x:0,y:3}
+            });
+            expect(resultado).to.equal(juego.TOCADO);
+        });
     });
 });

@@ -120,6 +120,10 @@ function colocaBarco(partida, barco) {
     };
 }
 
+function dispara(partida, disparo) {
+    return AGUA;
+}
+
 function nuevaPartida() {
     return {
         estado: EMPEZANDO,
@@ -127,6 +131,9 @@ function nuevaPartida() {
         tableroRojo: {barcos: []},
         colocaBarco: function (barco) {
             return colocaBarco(this, barco);
+        },
+        dispara: function (disparo) {
+            return dispara(this, disparo);
         }
     };
 }
