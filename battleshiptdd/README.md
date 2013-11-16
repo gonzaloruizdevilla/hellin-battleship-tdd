@@ -5,7 +5,7 @@ Guerra Naval es un juego similar al hundir la flota, que se desarrolla sobre dos
 El objetivo del juego es hundir todos barcos del contrario. Para ello, cada jugador realiza por turno un disparo pulsando sobre el radar. Si conseguimos alcanzar un barco enemigo el jugador repite turno.
 
 Repartiendo las unidades
-Para iniciar el juego hay que situar los 9 barcos en el tablero azul. Cada jugador dispone de un acorazado (de 4 casillas de largo), tres submarinos (de 3 casillas cada uno), tres corbetas (de 2 casillas) y dos lanchas (de 1 casilla).
+Para iniciar el juego hay que situar los 9 barcos en el tablero azul. Cada jugador dispone de un acorazado (de 5 casillas de largo), dos submarinos (de 4 casillas cada uno), tres corbetas (de 3 casillas) y cuatro lanchas (de 2 casilla).
 
 El jugador podrá colocar sus unidades pulsando con el botón izquierdo del ratón sobre la malla azul en donde aparecerá una marca de color verde o roja. Si la marca es verde es posible colocar el barco en esa posición. Si por el contrario es roja indica que no es posible colocarlo en ese lugar y tendrá que elegir otro.
 
@@ -14,7 +14,7 @@ Para cambiar la dirección del barco pulsaremos sobre las flechas situadas fuera
 Una forma automática y rápida de distribuir las unidades es pulsar el botón aleatorio.
 
 Empezando la partida
-Una vez distribuidos los 9 barcos podemos encontrarnos con el aviso: Esperando confirmación de los demás jugadores si el contrincante aún no ha finalizado la colocación de sus unidades.
+Una vez distribuidos los 10 barcos podemos encontrarnos con el aviso: Esperando confirmación de los demás jugadores si el contrincante aún no ha finalizado la colocación de sus unidades.
 
 Iniciado ya el juego y en el turno del jugador, podrá pulsar sobre la malla de color verde (radar) para disparar. La respuesta será la iluminación del rectángulo en azul (agua), marrón (unidad tocada) o rojo (unidad hundida).
 
