@@ -144,6 +144,14 @@ function actualizaEstadoBarco(barco) {
     barco.estado = hundido ? HUNDIDO : TOCADO;
 }
 
+function todosHundidos(barcos) {
+    var hundidos = true;
+    barcos.forEach(function (barco) {
+        hundidos = hundidos && (barco.estado === HUNDIDO);
+    });
+    return hundidos;
+}
+
 function dispara(partida, disparo) {
     var tablero = seleccionaTablero(partida, disparo.destino),
         barco = buscaBarco(tablero, disparo.coordenadas),
@@ -153,6 +161,10 @@ function dispara(partida, disparo) {
     } else {
         actualizaEstadoBarco(barco, disparo.coordenadas);
         resultado = barco.estado;
+        if (resultado === HUNDIDO && todosHundidos(tablero.barcos)) {
+            resultado = GANA;
+            partida.estado = resultado;
+        }
     }
     return resultado;
 }
