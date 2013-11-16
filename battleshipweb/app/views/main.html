@@ -1,0 +1,88 @@
+
+<div ng-show="estado == 'CARGANDO'" class="row">
+  <div class="col-md-12">
+    <h3>Cargando partida ...</h3>
+  </div>
+</div>
+<div ng-show="estado == 'PREPARANDO'" class="row">
+  <div class="col-md-12">
+    <h1>Eres el jugador {{color}}<small>&nbsp;(Partida {{numero}})</small></h1>
+  </div>
+</div>
+<div ng-show="estado == 'PREPARANDO'" class="row">
+  <div class="col-md-6">
+    <h3>Prepara tu tablero</h3>
+    <p> </p>
+    <div ng-mouseout="barcoSobreCelda(null, null)" class="tablero">
+      <table>
+        <tbody>
+          <tr ng-repeat="fila in tableroJugador.filas">
+            <td ng-repeat="celda in fila" ng-class="{posible: celdaPosible(celda), conflicto: conflicto(celda), ocupada: celda.ocupada}" ng-mouseover="barcoSobreCelda(siguienteBarco,celda)" ng-click="situaBarco(celda)">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div ng-show="colocandoFichas &amp;&amp; siguienteBarco" class="col-md-6">
+    <h3>Coloca la siguiente ficha.</h3>
+    <p>Barco: {{siguienteBarco.nombre}}</p>
+    <div class="btn-group">
+      <div ng-class="{&quot;btn-default&quot;:horizontal, &quot;btn-primary&quot;:!horizontal}" ng-click="horizontal=false" class="btn glyphicon glyphicon-arrow-down"></div>
+      <div ng-class="{&quot;btn-default&quot;:!horizontal, &quot;btn-primary&quot;:horizontal}" ng-click="horizontal=true" class="btn glyphicon glyphicon-arrow-right"></div>
+    </div>
+  </div>
+  <div ng-show="colocandoFichas &amp;&amp; !siguienteBarco" class="col-md-6">
+    <h3>Tu tablero ya está colocado.</h3>
+    <p>Esperando a que tu oponente termine...</p>
+    <p>Estado partida: {{estadoPartida}}</p>
+  </div>
+</div>
+<div ng-show="estado == 'JUGANDO'" class="row">
+  <div class="col-md-12">
+    <h1>Eres el jugador {{color}}<small>&nbsp;(Partida {{numero}})</small></h1>
+  </div>
+</div>
+<div ng-show="estado == 'JUGANDO'" class="row">
+  <div class="col-md-6">
+    <h3>Tu tablero</h3>
+    <p>&nbsp;</p>
+    <div class="tablero">
+      <table>
+        <tbody>
+          <tr ng-repeat="fila in tableroJugador.filas">
+            <td ng-repeat="celda in fila" ng-class="{ocupada: celda.ocupada}" class="{{celda.resultado}}">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h3>Tablero oponente</h3>
+    <p ng-show="turno == 'DISPARANDO'">¡Te toca disparar!</p>
+    <p ng-show="turno == 'ENVIANDO'">¡Te toca disparar!</p>
+    <p ng-show="turno == 'ESPERANDO'">Tu oponente está disparando...</p>
+    <div ng-mouseout="dejaDeDisparar()" class="tablero">
+      <table>
+        <tbody>
+          <tr ng-repeat="fila in tableroOponente.filas">
+            <td ng-repeat="celda in fila" ng-mouseover="sobreObjetivo(celda)" ng-class="{disparable: disparable(celda), agua: celda.agua, tocado: celda.tocado, hundido: celda.hundido}" ng-click="disparo(celda)">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div ng-show="turno == 'HAS_GANADO'" class="row">
+  <div class="col-md-12">
+    <div class="alert alert-success">
+      <h1 class="success">¡HAS GANADO!</h1>
+    </div>
+  </div>
+</div>
+<div ng-show="turno == 'HAS_PERDIDO'" class="row">
+  <div class="col-md-12">
+    <div class="alert alert-danger">
+      <h1 class="success">¡HAS PERDIDO!</h1>
+    </div>
+  </div>
+</div>

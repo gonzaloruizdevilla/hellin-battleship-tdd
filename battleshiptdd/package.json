@@ -1,0 +1,20 @@
+{
+  "name": "battleship-tdd",
+  "version": "0.0.1",
+  "author": "Gonzalo Ruiz de Villa <gonzaloruizdevilla@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gruizdevilla/battleship-tdd.git"
+  },
+  "main": "app.js",
+  "dependencies": {
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "devDependencies": {
+    "sandboxed-module": "~0.3.0",
+    "chai": "~1.8.1"
+  }
+}

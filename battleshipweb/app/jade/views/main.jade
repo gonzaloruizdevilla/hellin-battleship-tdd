@@ -1,0 +1,67 @@
+.row(ng-show="estado == 'CARGANDO'")
+	.col-md-12
+		h3 Cargando partida ...
+.row(ng-show="estado == 'PREPARANDO'")
+	.col-md-12
+		h1 Eres el jugador {{color}}
+			small &nbsp;(Partida {{numero}})
+.row(ng-show="estado == 'PREPARANDO'")
+	.col-md-6
+		h3 Prepara tu tablero
+		p 
+		.tablero(ng-mouseout="barcoSobreCelda(null, null)")
+			table
+				tbody
+					tr(ng-repeat="fila in tableroJugador.filas")
+						td(ng-repeat="celda in fila",
+						   ng-class="{posible: celdaPosible(celda), conflicto: conflicto(celda), ocupada: celda.ocupada}"
+						   ng-mouseover="barcoSobreCelda(siguienteBarco,celda)",
+						   ng-click="situaBarco(celda)") &nbsp;
+	.col-md-6(ng-show="colocandoFichas && siguienteBarco")
+		h3 Coloca la siguiente ficha.
+		p Barco: {{siguienteBarco.nombre}}
+		.btn-group
+			.btn.glyphicon.glyphicon-arrow-down(ng-class='{"btn-default":horizontal, "btn-primary":!horizontal}', ng-click="horizontal=false")
+			.btn.glyphicon.glyphicon-arrow-right(ng-class='{"btn-default":!horizontal, "btn-primary":horizontal}', ng-click="horizontal=true")
+	.col-md-6(ng-show="colocandoFichas && !siguienteBarco")
+		h3 Tu tablero ya está colocado.
+		p Esperando a que tu oponente termine...
+		p Estado partida: {{estadoPartida}}
+.row(ng-show="estado == 'JUGANDO'")
+	.col-md-12
+		h1 Eres el jugador {{color}}
+			small &nbsp;(Partida {{numero}})
+.row(ng-show="estado == 'JUGANDO'")
+	.col-md-6
+		h3 Tu tablero
+		p &nbsp;
+		.tablero()
+			table
+				tbody
+					tr(ng-repeat="fila in tableroJugador.filas")
+						td(ng-repeat="celda in fila",
+							class="{{celda.resultado}}",
+						    ng-class="{ocupada: celda.ocupada}") &nbsp;
+	.col-md-6
+		h3 Tablero oponente
+		p(ng-show="turno == 'DISPARANDO'") ¡Te toca disparar!
+		p(ng-show="turno == 'ENVIANDO'") ¡Te toca disparar!
+		p(ng-show="turno == 'ESPERANDO'") Tu oponente está disparando...
+		.tablero(ng-mouseout="dejaDeDisparar()")
+			table
+				tbody
+					tr(ng-repeat="fila in tableroOponente.filas")
+						td(ng-repeat="celda in fila",
+							ng-mouseover="sobreObjetivo(celda)",
+							ng-class="{disparable: disparable(celda), agua: celda.agua, tocado: celda.tocado, hundido: celda.hundido}",
+							ng-click="disparo(celda)") &nbsp;
+
+
+.row(ng-show="turno == 'HAS_GANADO'")
+	.col-md-12
+		.alert.alert-success
+			h1.success ¡HAS GANADO!
+.row(ng-show="turno == 'HAS_PERDIDO'")
+	.col-md-12
+		.alert.alert-danger
+			h1.success ¡HAS PERDIDO!
