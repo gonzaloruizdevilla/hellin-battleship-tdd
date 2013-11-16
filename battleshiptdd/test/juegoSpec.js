@@ -208,5 +208,12 @@ describe('juego', function  () {
             tableroRojo = partida.tableroRojo;
         });
 
+        it('debe informar cuando hace agua', function (){
+            var resultado = partida.dispara({
+                destino: juego.ROJO,
+                coordenadas: {x:9,y:0}
+            });
+            expect(resultado).to.equal(juego.AGUA);
+        });
     });
 });
