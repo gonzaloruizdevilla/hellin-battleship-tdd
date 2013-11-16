@@ -74,6 +74,45 @@ describe('juego', function  () {
             expect(tableroRojo.barcos[0].direccion).to.equal(juego.HORIZONTAL);
             expect(tableroRojo.barcos[0].tipo).to.equal(juego.ACORAZADO);
         });
+
+        it('debe impedir colocar un barco fuera de los limites del tablero', function () {
+            function colocaBarcoFuera() {
+                partida.colocaBarco({
+                    color: juego.ROJO,
+                    posicion: {
+                        x: -1,
+                        y: 0
+                    },
+                    direccion: juego.HORIZONTAL,
+                    tipo: juego.ACORAZADO
+                });
+            }
+            function colocaBarcoFuera2(){
+                partida.colocaBarco({
+                    color: juego.ROJO,
+                    posicion: {
+                        x: 9,
+                        y: 0
+                    },
+                    direccion: juego.HORIZONTAL,
+                    tipo: juego.ACORAZADO
+                });
+            }
+            function colocaBarcoFuera3(){
+                partida.colocaBarco({
+                    color: juego.ROJO,
+                    posicion: {
+                        x: 0,
+                        y: 9
+                    },
+                    direccion: juego.VERTICAL,
+                    tipo: juego.ACORAZADO
+                });
+            }
+            expect(colocaBarcoFuera).to.throw("Barco fuera de los limites.");
+            expect(colocaBarcoFuera2).to.throw("Barco fuera de los limites.");
+            expect(colocaBarcoFuera3).to.throw("Barco fuera de los limites.");
+        });
     });
 
 });

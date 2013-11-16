@@ -25,11 +25,30 @@
         COLOCANDO = "COLOCANDO",
         COLOCADO = "COLOCADO";
 
+function seleccionaTablero(partida, color) {
+    return color === ROJO ? partida.tableroRojo : partida.tableroAzul;
+}
+
+function preparaBarcoParaColocar(barco) {
+    return {
+        posicion: barco.posicion,
+        direccion: barco.direccion,
+        tipo: barco.tipo
+    };
+}
+
+function colocaBarco(partida, barco) {
+    var tablero = seleccionaTablero(partida, barco.color);
+    tablero.barcos.push(preparaBarcoParaColocar(barco));
+}
 
 function nuevaPartida() {
     return {
-        tableroAzul: {},
-        tableroRojo: {}
+        tableroAzul: {barcos: []},
+        tableroRojo: {barcos: []},
+        colocaBarco: function (barco) {
+            return colocaBarco(this, barco);
+        }
     };
 }
 
