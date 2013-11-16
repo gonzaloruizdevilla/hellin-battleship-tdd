@@ -199,4 +199,14 @@ describe('juego', function  () {
         });
     });
 
+    describe('dispara', function () {
+        var tableroAzul, tableroRojo, partida;
+        beforeEach(function () {
+            partida = juego.nuevaPartida();
+            cargaBarcos(partida);
+            tableroAzul = partida.tableroAzul;
+            tableroRojo = partida.tableroRojo;
+        });
+
+    });
 });

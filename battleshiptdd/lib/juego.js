@@ -103,6 +103,11 @@ function actualizaEstadoTablero(tablero) {
 function actualizaEstadoPartida(partida) {
     actualizaEstadoTablero(partida.tableroRojo);
     actualizaEstadoTablero(partida.tableroAzul);
+    if (partida.tableroRojo.estado === COLOCANDO || partida.tableroAzul.estado === COLOCANDO) {
+        partida.estado = EMPEZANDO;
+    } else {
+        partida.estado = JUGANDO;
+    }
 }
 
 function colocaBarco(partida, barco) {
@@ -117,6 +122,7 @@ function colocaBarco(partida, barco) {
 
 function nuevaPartida() {
     return {
+        estado: EMPEZANDO,
         tableroAzul: {barcos: []},
         tableroRojo: {barcos: []},
         colocaBarco: function (barco) {
