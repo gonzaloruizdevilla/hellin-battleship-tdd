@@ -49,4 +49,13 @@ describe('juego', function  () {
         });
     });
 
+    describe('colocaBarco', function () {
+        var tableroAzul, tableroRojo, partida;
+        beforeEach(function () {
+            partida = juego.nuevaPartida();
+            tableroAzul = partida.tableroAzul;
+            tableroRojo = partida.tableroRojo;
+        });
+    });
+
 });

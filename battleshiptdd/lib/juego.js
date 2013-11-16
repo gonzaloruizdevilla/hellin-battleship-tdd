@@ -28,6 +28,8 @@
 
 function nuevaPartida() {
     return {
+        tableroAzul: {},
+        tableroRojo: {}
     };
 }
 
@@ -48,5 +50,6 @@ module.exports = {
     JUGANDO: JUGANDO,
     FINALIZADO: FINALIZADO,
     COLOCADO: COLOCADO,
+    COLOCANDO: COLOCANDO,
     nuevaPartida: nuevaPartida
 };
