@@ -26,6 +26,8 @@
         COLOCADO = "COLOCADO";
 
 
+function nuevaPartida() {
+}
 
 module.exports = {
     HORIZONTAL: HORIZONTAL,
@@ -44,5 +46,5 @@ module.exports = {
     JUGANDO: JUGANDO,
     FINALIZADO: FINALIZADO,
     COLOCADO: COLOCADO,
-    COLOCANDO: COLOCANDO
+    nuevaPartida: nuevaPartida
 };

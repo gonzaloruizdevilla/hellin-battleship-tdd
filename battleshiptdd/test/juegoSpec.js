@@ -36,4 +36,11 @@ describe('juego', function  () {
         expect(juego.CORBETA).not.to.be.undefined;
         expect(juego.LANCHA).not.to.be.undefined;
     });
+
+    describe('nuevaPartida', function() {
+        it('debe crear una nueva partida', function () {
+            expect(juego.nuevaPartida()).not.to.be.null;
+        });
+    });
+
 });
