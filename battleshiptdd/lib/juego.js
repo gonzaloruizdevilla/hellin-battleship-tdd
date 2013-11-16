@@ -37,8 +37,34 @@ function preparaBarcoParaColocar(barco) {
     };
 }
 
+function largos(tipo) {
+    var longitud;
+    if (tipo === ACORAZADO) {longitud = 5; }
+    if (tipo === SUBMARINO) {longitud = 4; }
+    if (tipo === CORBETA) {longitud = 3; }
+    if (tipo === LANCHA) {longitud = 2; }
+    return longitud;
+}
+
+function largoAdicional(opciones, direccion) {
+    return (opciones.direccion !== direccion) ? 0 : largos(opciones.tipo) - 1;
+}
+
+function verificaPosicionBarco(tablero, opciones) {
+    var i,
+           posicion = opciones.posicion,
+           minX = posicion.x,
+           minY = posicion.y,
+           maxX = posicion.x + largoAdicional(opciones, HORIZONTAL),
+           maxY = posicion.y + largoAdicional(opciones, VERTICAL);
+   if (minX < 0 || minY < 0 || maxX > 9 || maxY > 9) {
+       throw Error("Barco fuera de los limites.");
+   }
+}
+
 function colocaBarco(partida, barco) {
     var tablero = seleccionaTablero(partida, barco.color);
+    verificaPosicionBarco(tablero, barco);
     tablero.barcos.push(preparaBarcoParaColocar(barco));
 }
 

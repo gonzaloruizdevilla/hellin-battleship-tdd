@@ -113,6 +113,30 @@ describe('juego', function  () {
             expect(colocaBarcoFuera2).to.throw("Barco fuera de los limites.");
             expect(colocaBarcoFuera3).to.throw("Barco fuera de los limites.");
         });
+
+        it('debe impedir colocar un barco sobre otro', function () {
+            partida.colocaBarco({
+                color: juego.ROJO,
+                posicion: {
+                    x: 0,
+                    y: 0
+                },
+                direccion: juego.HORIZONTAL,
+                tipo: juego.ACORAZADO
+            });
+            function colocaBarcoEncima(){
+                partida.colocaBarco({
+                    color: juego.ROJO,
+                    posicion: {
+                        x: 1,
+                        y: 0
+                    },
+                    direccion: juego.HORIZONTAL,
+                    tipo: juego.SUBMARINO
+                });
+            }
+            expect(colocaBarcoEncima).to.throw("Barco coincidente con otro en casillas (1, 0)");
+        });
     });
 
 });
